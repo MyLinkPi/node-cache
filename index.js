@@ -1,5 +1,7 @@
 'use strict';
 
+const MAX_TIME = 2 ** 31 -1;
+
 function Cache () {
   var _cache = Object.create(null);
   var _hitCount = 0;
@@ -8,6 +10,7 @@ function Cache () {
   var _debug = false;
 
   this.put = function(key, value, time, timeoutCallback) {
+    if (time > MAX_TIME) time = MAX_TIME;
     if (_debug) {
       console.log('caching: %s = %j (@%s)', key, value, time);
     }
